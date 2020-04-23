@@ -1,0 +1,23 @@
+{
+	"name": "social_app",
+	"version": "1.0.0",
+	"description": "A Basic Social Media App for Sharing Posts",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server",
+		"server": "nodemon server",
+		"client": "npm start --prefix client"
+	},
+	"author": "Neil Kapadia",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"config": "^3.3.1",
+		"express": "^4.17.1",
+		"mongoose": "^5.9.10"
+	},
+	"devDependencies": {
+		"concurrently": "^5.1.0",
+		"nodemon": "^2.0.3"
+	}
+}
