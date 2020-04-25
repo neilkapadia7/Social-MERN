@@ -4,6 +4,9 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 
 const Post = require("../models/Posts");
+const User = require("../models/User");
+const Like = require("../models/Likes");
+const Comment = require("../models/Comments");
 
 // @route   GET    api/posts
 // @desc    Get All Post
@@ -137,5 +140,76 @@ router.get("/user/:id", auth, async (req, res) => {
 		res.status(500).send("Server Error");
 	}
 });
+
+// @route   POST    api/posts/like/:id
+// @desc    Like Post
+// @access  Private
+router.post("/like/:id", auth, async (req, res) => {
+	try {
+		const post = await Post.findById(req.params.id);
+
+		if (!post) return res.status(404).json({ msg: "Post Not Found" });
+
+		const user = await User.findById(req.user.id).select("-password");
+
+		const u_id = user._id;
+		const u_name = `${user.firstName} ${user.lastName}`;
+
+		const newLike = new Like({
+			post_id: req.params.id,
+			user: u_name,
+			user_id: u_id,
+		});
+
+		const like = await newLike.save();
+
+		res.json(like);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send("Server Error");
+	}
+});
+
+// @route   POST    api/posts/comment
+// @desc    Comment Post
+// @access  Private
+router.post(
+	"/comment/:id",
+	[auth, [check("body", "Comment is Required").not().isEmpty()]],
+	async (req, res) => {
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			res.status(400).json({ errors: errors.array() });
+		}
+
+		const { body } = req.body;
+
+		try {
+			const post = await Post.findById(req.params.id);
+
+			if (!post) return res.status(404).json({ msg: "Post Not Found" });
+
+			const user = await User.findById(req.user.id).select("-password");
+
+			const u_id = user._id;
+			const u_name = `${user.firstName} ${user.lastName}`;
+
+			const newComment = new Comment({
+				post_id: req.params.id,
+				user: u_name,
+				user_id: u_id,
+				body,
+			});
+
+			const comment = await newComment.save();
+
+			res.json(comment);
+		} catch (err) {
+			console.error(err.message);
+			res.status(500).send("Server Error");
+		}
+	}
+);
 
 module.exports = router;
