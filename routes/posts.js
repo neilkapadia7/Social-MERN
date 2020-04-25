@@ -144,7 +144,7 @@ router.get("/user/:id", auth, async (req, res) => {
 // @route   POST    api/posts/like/:id
 // @desc    Like Post
 // @access  Private
-router.post("/like/:id", auth, async (req, res) => {
+router.put("/like/:id", auth, async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.id);
 
@@ -154,15 +154,28 @@ router.post("/like/:id", auth, async (req, res) => {
 
 		const u_id = user._id;
 		const u_name = `${user.firstName} ${user.lastName}`;
+		// const user_obj = [
+		// 	{
+		// 		u_name,
+		// 		u_id,
+		// 		date: Date(),
+		// 	},
+		// ];
+
+		let like = await Like.find({ post_id: req.params.id });
 
 		const newLike = new Like({
 			post_id: req.params.id,
-			user: u_name,
-			user_id: u_id,
+			user_obj: [
+				{
+					u_name,
+					u_id,
+					date: Date(),
+				},
+			],
 		});
 
-		const like = await newLike.save();
-
+		like = await newLike.save();
 		res.json(like);
 	} catch (err) {
 		console.error(err.message);

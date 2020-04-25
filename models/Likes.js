@@ -5,18 +5,22 @@ const LikeSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	user: {
-		type: String,
+	user_obj: {
+		type: Array,
 		required: true,
 	},
-	user_id: {
-		type: String,
-		required: true,
-	},
-	date: {
-		type: Date,
-		default: Date.now(),
-	},
+	// user: {
+	// 	type: String,
+	// 	required: true,
+	// },
+	// user_id: {
+	// 	type: String,
+	// 	required: true,
+	// },
+	// date: {
+	// 	type: Date,
+	// 	default: Date.now(),
+	// },
 });
 
 module.exports = mongoose.model("like", LikeSchema);
