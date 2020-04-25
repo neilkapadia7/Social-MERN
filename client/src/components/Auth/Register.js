@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { register, clearErrors } from '../../Actions/authAction';
+import { register, clearErrors, loadUser } from '../../Actions/authAction';
 import PropTypes from 'prop-types';
 
 const Register = (props) => {
@@ -8,9 +8,14 @@ const Register = (props) => {
 		auth: { isAuthenticated, error },
 		register,
 		clearErrors,
+		loadUser,
 	} = props;
 
 	useEffect(() => {
+		if (localStorage.token) {
+			loadUser();
+		}
+
 		if (isAuthenticated) {
 			props.history.push('/');
 		}
@@ -19,7 +24,7 @@ const Register = (props) => {
 			console.log(error);
 			clearErrors();
 		}
-	}, [isAuthenticated, error, props.history, clearErrors]);
+	}, [isAuthenticated, error, loadUser, props.history, clearErrors]);
 
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -87,10 +92,13 @@ Register.propTypes = {
 	auth: PropTypes.object.isRequired,
 	register: PropTypes.func.isRequired,
 	clearErrors: PropTypes.func.isRequired,
+	loadUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, { register, clearErrors })(Register);
+export default connect(mapStateToProps, { register, clearErrors, loadUser })(
+	Register
+);

@@ -4,6 +4,9 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Home from './components/Pages/Home';
 
+import Navbar from './components/Layout/Navbar';
+import PrivateRoute from './routing/PrivateRoute';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -19,8 +22,9 @@ const App = () => {
 		<Provider store={store}>
 			<div className='App'>
 				<Router>
+					<Navbar />
 					<Switch>
-						<Route exact path='/' component={Home} />
+						<PrivateRoute exact path='/' component={Home} />
 						<Route exact path='/register' component={Register} />
 						<Route exact path='/login' component={Login} />
 					</Switch>

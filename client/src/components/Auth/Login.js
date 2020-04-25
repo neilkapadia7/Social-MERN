@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { login, clearErrors } from '../../Actions/authAction';
+import { login, clearErrors, loadUser } from '../../Actions/authAction';
 import PropTypes from 'prop-types';
 
 const Login = (props) => {
 	const {
-		auth: { isAuthenticated, error },
+		auth: { isAuthenticated, error, loading },
 		login,
 		clearErrors,
+		loadUser,
 	} = props;
 
 	useEffect(() => {
+		if (localStorage.token) {
+			loadUser();
+		}
 		if (isAuthenticated) {
 			props.history.push('/');
 		}
@@ -19,7 +23,7 @@ const Login = (props) => {
 			console.log(error);
 			clearErrors();
 		}
-	}, [isAuthenticated, error, props.history, clearErrors]);
+	}, [isAuthenticated, error, loadUser, props.history, clearErrors]);
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -36,6 +40,10 @@ const Login = (props) => {
 			password,
 		});
 	};
+
+	if (loading) {
+		return <h3>Loading</h3>;
+	}
 
 	return (
 		<div>
@@ -64,10 +72,13 @@ Login.propTypes = {
 	auth: PropTypes.object.isRequired,
 	login: PropTypes.func.isRequired,
 	clearErrors: PropTypes.func.isRequired,
+	loadUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(Login);
+export default connect(mapStateToProps, { login, clearErrors, loadUser })(
+	Login
+);
