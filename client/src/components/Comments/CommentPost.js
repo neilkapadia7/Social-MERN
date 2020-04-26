@@ -31,6 +31,8 @@ const CommentPost = (props) => {
 		const res = await axios.post(`/api/posts/comment/${postid}`, data, config);
 
 		setComments([res.data, ...comments2]);
+
+		setNewComment('');
 	};
 
 	return (
