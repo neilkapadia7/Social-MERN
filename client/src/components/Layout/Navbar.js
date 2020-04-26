@@ -18,7 +18,9 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 	const authLinks = (
 		<Fragment>
 			<li>
-				<Link to='!#'>{user && user.firstName + ' ' + user.lastName}</Link>
+				<Link to='/profile'>
+					{user && user.firstName + ' ' + user.lastName}
+				</Link>
 			</li>
 			<li>
 				<Link to='/'>Home</Link>

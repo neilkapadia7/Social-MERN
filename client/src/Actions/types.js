@@ -11,4 +11,5 @@ export const LOGOUT = 'LOGOUT';
 // Posts
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_ERROR = 'POST_ERROR';
+export const GET_POSTS = 'GET_POSTS';
 export const POST_LOADING = 'POST_LOADING';

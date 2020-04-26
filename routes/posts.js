@@ -26,13 +26,7 @@ router.get('/', auth, async (req, res) => {
 // @access  Private
 router.post(
 	'/',
-	[
-		auth,
-		[
-			check('body', 'Post is Required').not().isEmpty(),
-			check('author', 'Author is Required').not().isEmpty(),
-		],
-	],
+	[auth, [check('body', 'Post is Required').not().isEmpty()]],
 	async (req, res) => {
 		const errors = validationResult(req);
 
@@ -40,13 +34,17 @@ router.post(
 			res.status(400).json({ errors: errors.array() });
 		}
 
-		const { body, author } = req.body;
+		const { body } = req.body;
 
 		try {
+			const user = await User.findById(req.user.id).select('-password');
+
+			const author = user.firstName + ' ' + user.lastName;
+
 			const newPost = new Post({
 				user: req.user.id,
 				body,
-				author,
+				author: author,
 			});
 
 			const post = await newPost.save();

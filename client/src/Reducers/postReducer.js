@@ -1,4 +1,9 @@
-import { POST_ERROR, POST_SUCCESS, POST_LOADING } from '../Actions/types';
+import {
+	POST_ERROR,
+	POST_SUCCESS,
+	POST_LOADING,
+	GET_POSTS,
+} from '../Actions/types';
 
 const initialState = {
 	posts: null,
@@ -11,10 +16,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case POST_SUCCESS:
+		case GET_POSTS:
 			return {
 				...state,
 				posts: action.payload,
+				post_loading: false,
+			};
+		case POST_SUCCESS:
+			return {
+				...state,
+				posts: [action.payload, ...state.posts],
 				post_loading: false,
 			};
 		case POST_ERROR:

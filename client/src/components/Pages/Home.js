@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { loadUser } from '../../Actions/authAction';
 import { getPosts } from '../../Actions/postAction';
 import PostItem from '../Posts/PostItem';
+import AddPost from '../Posts/AddPost';
 
 const Home = ({ postState: { posts, post_loading }, loadUser, getPosts }) => {
 	useEffect(() => {
@@ -19,6 +20,7 @@ const Home = ({ postState: { posts, post_loading }, loadUser, getPosts }) => {
 	return (
 		<div>
 			<h1>Home</h1>
+			<AddPost />
 			{posts !== null
 				? posts.map((post) => <PostItem key={post._id} post={post} />)
 				: null}

@@ -3,6 +3,7 @@ import './App.css';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Home from './components/Pages/Home';
+import Profile from './components/Pages/Profile';
 
 import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './routing/PrivateRoute';
@@ -25,6 +26,7 @@ const App = () => {
 					<Navbar />
 					<Switch>
 						<PrivateRoute exact path='/' component={Home} />
+						<PrivateRoute exact path='/profile' component={Profile} />
 						<Route exact path='/register' component={Register} />
 						<Route exact path='/login' component={Login} />
 					</Switch>
