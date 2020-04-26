@@ -11,11 +11,11 @@ const AddPost = ({ addPost }) => {
 
 		if (body === '') {
 			console.log('Add Something');
+		} else {
+			addPost({ body });
+
+			setBody('');
 		}
-
-		addPost({ body });
-
-		setBody('');
 	};
 
 	return (

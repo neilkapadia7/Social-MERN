@@ -16,23 +16,27 @@ const CommentPost = (props) => {
 	const addComment = async () => {
 		if (newComment === '') {
 			console.log('Please Add A Comment');
+		} else {
+			let body = newComment;
+
+			let data = { body };
+
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			const res = await axios.post(
+				`/api/posts/comment/${postid}`,
+				data,
+				config
+			);
+
+			setComments([res.data, ...comments2]);
+
+			setNewComment('');
 		}
-
-		let body = newComment;
-
-		let data = { body };
-
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		};
-
-		const res = await axios.post(`/api/posts/comment/${postid}`, data, config);
-
-		setComments([res.data, ...comments2]);
-
-		setNewComment('');
 	};
 
 	return (

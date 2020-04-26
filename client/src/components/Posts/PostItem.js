@@ -20,9 +20,9 @@ const PostItem = (props) => {
 
 	return (
 		<div>
-			<p>{post.author}</p>
+			<p style={{ fontWeight: 900 }}>{post.author}</p>
 			<p>{post.date}</p>
-			<h4>{post.body}</h4>
+			<h5>{post.body}</h5>
 			<div>
 				{comments !== null ? (
 					<CommentPost key={v4()} comments={comments} postid={post._id} />
