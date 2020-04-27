@@ -6,11 +6,13 @@ import v4 from 'uuid';
 import { connect } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css';
 import UpdatePost from './UpdatePost';
+import { deletePost } from '../../Actions/postAction';
 
 const PostItem = (props) => {
 	const {
 		auth: { user },
 		post,
+		deletePost,
 	} = props;
 
 	const [comments, setComments] = useState(null);
@@ -24,6 +26,10 @@ const PostItem = (props) => {
 		comments();
 	}, [post._id]);
 
+	const RemovePost = () => {
+		deletePost(post._id);
+	};
+
 	return (
 		<div>
 			<p style={{ fontWeight: 900 }}>{post.author}</p>
@@ -34,7 +40,9 @@ const PostItem = (props) => {
 					<a href='#update-modal' className='modal-trigger'>
 						Edit
 					</a>
-					<p>Remove</p>
+					<a href='#!' onClick={RemovePost}>
+						Remove
+					</a>
 				</div>
 			) : (
 				''
@@ -51,10 +59,11 @@ const PostItem = (props) => {
 
 PostItem.propTypes = {
 	post: PropTypes.object.isRequired,
+	deletePost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, {})(PostItem);
+export default connect(mapStateToProps, { deletePost })(PostItem);

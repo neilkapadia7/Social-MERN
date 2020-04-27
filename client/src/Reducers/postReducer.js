@@ -5,6 +5,7 @@ import {
 	GET_POSTS,
 	GET_AUTH_POSTS,
 	UPDATE_POST,
+	DELETE_POST,
 } from '../Actions/types';
 
 const initialState = {
@@ -44,6 +45,15 @@ export default (state = initialState, action) => {
 				),
 				posts: state.posts.map((post) =>
 					action.payload._id ? action.payload : post
+				),
+				post_loading: false,
+			};
+		case DELETE_POST:
+			return {
+				...state,
+				posts: state.posts.filter((post) => post._id !== action.payload),
+				auth_posts: state.auth_posts.filter(
+					(post) => post._id !== action.payload
 				),
 				post_loading: false,
 			};
