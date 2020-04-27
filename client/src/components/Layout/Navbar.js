@@ -46,7 +46,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 
 	return (
 		<div className='navbar-fixed'>
-			<nav>
+			<nav className='#2962ff blue accent-4'>
 				<div className='nav-wrapper'>
 					<a href='#1' className='brand-logo'>
 						PalmBook

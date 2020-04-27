@@ -48,7 +48,7 @@ const UpdatePost = (props) => {
 						placeholder='Add Post Content'
 					/>
 					<label htmlFor='body' className='active'>
-						Add Post
+						Update Post
 					</label>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import { getAuthPosts } from '../../Actions/postAction';
 import PostItem from '../Posts/PostItem';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import AddBtn from '../Posts/AddBtn';
 
 const Profile = ({ postState: { auth_posts, post_loading }, getAuthPosts }) => {
 	useEffect(() => {
@@ -13,7 +14,7 @@ const Profile = ({ postState: { auth_posts, post_loading }, getAuthPosts }) => {
 		M.AutoInit();
 
 		getAuthPosts();
-	}, [getAuthPosts, M]);
+	}, [getAuthPosts]);
 
 	if (post_loading) {
 		return <h3>Loading..</h3>;
@@ -21,9 +22,9 @@ const Profile = ({ postState: { auth_posts, post_loading }, getAuthPosts }) => {
 
 	return (
 		<div>
+			<AddBtn />
 			<div className='container'>
 				<h3>Profile</h3>
-				<AddPost />
 				{auth_posts !== null
 					? auth_posts.map((post) => (
 							<Fragment key={post._id}>
