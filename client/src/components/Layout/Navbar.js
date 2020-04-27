@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../Actions/authAction';
@@ -45,12 +45,19 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 	);
 
 	return (
-		<header>
-			<div className='logo'>PalmBook</div>
+		<div className='navbar-fixed'>
 			<nav>
-				<ul>{isAuthenticated ? authLinks : GuestLinks}</ul>
+				<div className='nav-wrapper'>
+					<a href='#1' className='brand-logo'>
+						PalmBook
+					</a>
+
+					<ul id='nav-mobile' className='right hide-on-med-and-down'>
+						{isAuthenticated ? authLinks : GuestLinks}
+					</ul>
+				</div>
 			</nav>
-		</header>
+		</div>
 	);
 };
 

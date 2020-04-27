@@ -4,6 +4,7 @@ import {
 	POST_LOADING,
 	GET_POSTS,
 	GET_AUTH_POSTS,
+	UPDATE_POST,
 } from '../Actions/types';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
 	post_loading: false,
 	post_error: null,
 	auth_posts: null,
+	current: null,
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +34,17 @@ export default (state = initialState, action) => {
 				...state,
 				posts: [action.payload, ...state.posts],
 				auth_posts: [action.payload, state.auth_posts],
+				post_loading: false,
+			};
+		case UPDATE_POST:
+			return {
+				...state,
+				auth_posts: state.auth_posts.map((post) =>
+					post._id === action.payload._id ? action.payload : post
+				),
+				posts: state.posts.map((post) =>
+					action.payload._id ? action.payload : post
+				),
 				post_loading: false,
 			};
 		case POST_ERROR:
