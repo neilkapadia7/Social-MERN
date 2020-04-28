@@ -34,7 +34,10 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				posts: [action.payload, ...state.posts],
-				auth_posts: [action.payload, state.auth_posts],
+				auth_posts:
+					state.auth_posts === null
+						? null
+						: [action.payload, ...state.auth_posts],
 				post_loading: false,
 			};
 		case UPDATE_POST:

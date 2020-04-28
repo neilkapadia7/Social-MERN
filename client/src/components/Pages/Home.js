@@ -25,11 +25,11 @@ const Home = ({ postState: { posts, post_loading }, loadUser, getPosts }) => {
 		<div>
 			<AddBtn />
 			<AddPost />
-			<h1>Home</h1>
-
-			{posts !== null
-				? posts.map((post) => <PostItem key={post._id} post={post} />)
-				: null}
+			<div className='post-main-div'>
+				{posts !== null
+					? posts.map((post) => <PostItem key={post._id} post={post} />)
+					: null}
+			</div>
 		</div>
 	);
 };

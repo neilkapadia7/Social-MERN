@@ -70,7 +70,7 @@ UpdatePost.propTypes = {
 
 const modalStyle = {
 	width: '75%',
-	height: '75%',
+	height: '75vh',
 };
 
 export default connect(null, { updatePost })(UpdatePost);

@@ -1,6 +1,5 @@
 import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import AddPost from '../Posts/AddPost';
 import { connect } from 'react-redux';
 import { getAuthPosts } from '../../Actions/postAction';
 import PostItem from '../Posts/PostItem';
@@ -25,13 +24,16 @@ const Profile = ({ postState: { auth_posts, post_loading }, getAuthPosts }) => {
 			<AddBtn />
 			<div className='container'>
 				<h3>Profile</h3>
-				{auth_posts !== null
-					? auth_posts.map((post) => (
-							<Fragment key={post._id}>
-								<PostItem key={post._id} post={post} />
-							</Fragment>
-					  ))
-					: null}
+
+				<div className='post-main-div'>
+					{auth_posts !== null
+						? auth_posts.map((post) => (
+								<Fragment key={post._id}>
+									<PostItem key={post._id} post={post} />
+								</Fragment>
+						  ))
+						: null}
+				</div>
 			</div>
 		</div>
 	);

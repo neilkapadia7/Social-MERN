@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css';
 import UpdatePost from './UpdatePost';
 import { deletePost } from '../../Actions/postAction';
+import Moment from 'react-moment';
 
 const PostItem = (props) => {
 	const {
@@ -31,23 +32,28 @@ const PostItem = (props) => {
 	};
 
 	return (
-		<div>
-			<p style={{ fontWeight: 900 }}>{post.author}</p>
-			<p>{post.date}</p>
-			<h5>{post.body}</h5>
-			{user && user._id === post.user ? (
-				<div>
-					<a href='#update-modal' className='modal-trigger'>
-						Edit
-					</a>
-					<a href='#!' onClick={RemovePost}>
-						Remove
-					</a>
-				</div>
-			) : (
-				''
-			)}
-			<div>
+		<div className='postitem-div'>
+			<div className='post-head'>
+				<p className='post-author'>{post.author}</p>
+				{user && user._id === post.user ? (
+					<div className='update-remove-div'>
+						<a href='#update-modal' className='modal-trigger update'>
+							Edit
+						</a>
+						<a href='#!' onClick={RemovePost} className='remove'>
+							Remove
+						</a>
+					</div>
+				) : (
+					''
+				)}
+			</div>
+			<Moment className='post-date' fromNow>
+				{post.date}
+			</Moment>
+			<h5 className='post-body'>{post.body}</h5>
+
+			<div className='comment-main-div'>
 				{comments !== null ? (
 					<CommentPost key={v4()} comments={comments} postid={post._id} />
 				) : null}
