@@ -57,15 +57,16 @@ router.post(
 	}
 );
 
-// @route   PUT    api/posts
+// @route   PUT    api/posts/:id
 // @desc    Update Post
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
-	const { body } = req.body;
+	const { body, likes } = req.body;
 
 	const postfields = {};
 
 	if (body) postfields.body = body;
+	if (likes) postfields.likes = likes;
 
 	try {
 		let post = await Post.findById(req.params.id);

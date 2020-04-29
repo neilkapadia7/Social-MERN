@@ -4,6 +4,8 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import 'materialize-css/dist/css/materialize.min.css';
 import { connect } from 'react-redux';
 import { setUserInfo } from '../../../Actions/authAction';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 const EditProfile = (props) => {
 	const { user, setUserInfo } = props;
@@ -14,7 +16,7 @@ const EditProfile = (props) => {
 		bio: '',
 		location: '',
 		website: '',
-		birthdate: '',
+		birthdate: new Date(),
 	});
 
 	const { firstName, lastName, bio, location, website, birthdate } = userData;
@@ -101,19 +103,20 @@ const EditProfile = (props) => {
 						Website
 					</label>
 				</div>
-
-				<div className='input-field'>
-					<input
-						type='date'
-						name='birthdate'
-						value={birthdate}
-						onChange={onChange}
-						className='datepicker'
-					/>
-					<label htmlFor='birthdate' className='active' onChange={onChange}>
-						Birth Date
-					</label>
-				</div>
+				{!user.birthdate && (
+					<div className='input-field'>
+						<input
+							type='date'
+							name='birthdate'
+							selected={birthdate}
+							onChange={onChange}
+							// maxDate={new Date()}
+						/>
+						<label htmlFor='birthdate' className='active'>
+							Birth Date
+						</label>
+					</div>
+				)}
 
 				<div className='modal-footer'>
 					<a

@@ -48,7 +48,7 @@ const Profile = ({
 					{user.birthdate && (
 						<p className='profile-birthdate'>
 							<i className='material-icons profile-icon'>person</i> Born{' '}
-							<Moment format='MMMM YYYY'>{user.birthdate}</Moment>
+							<Moment format='D MMMM YYYY'>{user.birthdate}</Moment>
 						</p>
 					)}
 					{user.location && (
@@ -63,8 +63,6 @@ const Profile = ({
 						</a>
 					)}
 				</div>
-
-				{/* <input type='text' class='datepicker' /> */}
 			</div>
 			<AddBtn />
 			<div className='post-main-div'>
