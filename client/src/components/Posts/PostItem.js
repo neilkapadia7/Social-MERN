@@ -25,7 +25,7 @@ const PostItem = (props) => {
 		};
 
 		comments();
-	}, [post._id]);
+	}, [post]);
 
 	const RemovePost = () => {
 		deletePost(post._id);

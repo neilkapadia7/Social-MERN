@@ -25,10 +25,15 @@ const UpdatePost = (props) => {
 	}, [post]);
 
 	const onSubmit = () => {
-		console.log(body);
-		console.log(post2);
-		updatePost(post2);
-		M.toast({ html: 'Post Updated!' });
+		if (body === '') {
+			M.toast({ html: 'The Post Cannot Be Empty' });
+			setPost(post);
+		} else {
+			console.log(body);
+			console.log(post2);
+			updatePost(post2);
+			M.toast({ html: 'Post Updated!' });
+		}
 	};
 
 	const onChange = (e) => {

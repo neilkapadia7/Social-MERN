@@ -3,7 +3,7 @@ import './App.css';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Home from './components/Pages/Home';
-import Profile from './components/Pages/Profile';
+import Profile from './components/Pages/Profile/Profile';
 
 import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './routing/PrivateRoute';

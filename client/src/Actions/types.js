@@ -8,6 +8,9 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const LOGOUT = 'LOGOUT';
 
+export const USER_INFO_FAIL = 'USER_INFO_FAIL';
+export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS';
+
 // Posts
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_ERROR = 'POST_ERROR';

@@ -7,6 +7,8 @@ import {
 	LOGIN_SUCCESS,
 	AUTH_ERROR,
 	USER_LOADED,
+	USER_INFO_FAIL,
+	USER_INFO_SUCCESS,
 } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
@@ -64,6 +66,25 @@ export const login = (formData) => async (dispatch) => {
 		dispatch(loadUser());
 	} catch (err) {
 		dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
+	}
+};
+
+export const setUserInfo = (userInfo) => async (dispatch) => {
+	dispatch({ type: SET_LOADING });
+
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const res = await axios.put(`api/users/${userInfo._id}`, userInfo, config);
+
+		dispatch({ type: USER_INFO_SUCCESS, payload: res.data });
+	} catch (err) {
+		console.log(err.response);
+		dispatch({ type: USER_INFO_FAIL, payload: err.response.data.msg });
 	}
 };
 

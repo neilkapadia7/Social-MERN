@@ -45,19 +45,41 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 	);
 
 	return (
-		<div className='navbar-fixed'>
-			<nav className='#2962ff blue accent-4'>
-				<div className='nav-wrapper'>
-					<a href='#1' className='brand-logo'>
-						PalmBook
-					</a>
+		<Fragment>
+			<div className='navbar-fixed'>
+				<nav className='#2962ff blue accent-4'>
+					<div className='nav-wrapper'>
+						<a href='#1' className='brand-logo'>
+							PalmBook
+						</a>
 
-					<ul id='nav-mobile' className='right hide-on-med-and-down'>
-						{isAuthenticated ? authLinks : GuestLinks}
-					</ul>
-				</div>
-			</nav>
-		</div>
+						<ul id='nav-mobile' className='right hide-on-med-and-down'>
+							{isAuthenticated ? authLinks : GuestLinks}
+						</ul>
+					</div>
+				</nav>
+			</div>
+			{isAuthenticated && (
+				<nav className='#2962ff blue accent-4'>
+					<div className='nav-wrapper'>
+						<form>
+							<div className='input-field'>
+								<input
+									id='search'
+									type='search'
+									placeholder='Seach Users'
+									required
+								/>
+								<label className='label-icon' htmlFor='search'>
+									<i className='material-icons'>search</i>
+								</label>
+								<i className='material-icons'>close</i>
+							</div>
+						</form>
+					</div>
+				</nav>
+			)}
+		</Fragment>
 	);
 };
 

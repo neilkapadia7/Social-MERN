@@ -8,6 +8,8 @@ import {
 	LOGOUT,
 	CLEAR_ERRORS,
 	USER_LOADED,
+	USER_INFO_SUCCESS,
+	USER_INFO_FAIL,
 } from '../Actions/types';
 
 const initialState = {
@@ -49,6 +51,20 @@ export default (state = initialState, action) => {
 				loading: false,
 				user: null,
 				error: action.payload,
+			};
+		case USER_INFO_SUCCESS:
+			return {
+				...state,
+				user: action.payload,
+				isAuthenticated: true,
+				loading: false,
+				error: null,
+			};
+		case USER_INFO_FAIL:
+			return {
+				...state,
+				error: action.payload,
+				loading: false,
 			};
 		case SET_LOADING:
 			return {
