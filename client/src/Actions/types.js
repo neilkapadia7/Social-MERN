@@ -20,3 +20,5 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const SET_CURRENT = 'SET_CURRENT';
 export const POST_LOADING = 'POST_LOADING';
+export const LIKE_SUCCESS = 'LIKE_SUCCESS';
+export const UNLIKE_SUCCESS = 'UNLIKE_SUCCESS';

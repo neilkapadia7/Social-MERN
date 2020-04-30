@@ -8,6 +8,7 @@ import 'materialize-css/dist/css/materialize.min.css';
 import UpdatePost from './UpdatePost';
 import { deletePost } from '../../Actions/postAction';
 import Moment from 'react-moment';
+import LikesButton from './LikesButton';
 
 const PostItem = (props) => {
 	const {
@@ -52,7 +53,7 @@ const PostItem = (props) => {
 				{post.date}
 			</Moment>
 			<h5 className='post-body'>{post.body}</h5>
-
+			<LikesButton post={post} />
 			<div className='comment-main-div'>
 				{comments !== null ? (
 					<CommentPost key={v4()} comments={comments} postid={post._id} />

@@ -143,44 +143,44 @@ router.get('/user/:id', auth, async (req, res) => {
 // @route   POST    api/posts/like/:id
 // @desc    Like Post
 // @access  Private
-router.put('/like/:id', auth, async (req, res) => {
-	try {
-		const post = await Post.findById(req.params.id);
+// router.put('/like/:id', auth, async (req, res) => {
+// 	try {
+// 		const post = await Post.findById(req.params.id);
 
-		if (!post) return res.status(404).json({ msg: 'Post Not Found' });
+// 		if (!post) return res.status(404).json({ msg: 'Post Not Found' });
 
-		const user = await User.findById(req.user.id).select('-password');
+// 		const user = await User.findById(req.user.id).select('-password');
 
-		const u_id = user._id;
-		const u_name = `${user.firstName} ${user.lastName}`;
-		// const user_obj = [
-		// 	{
-		// 		u_name,
-		// 		u_id,
-		// 		date: Date(),
-		// 	},
-		// ];
+// 		const u_id = user._id;
+// 		const u_name = `${user.firstName} ${user.lastName}`;
+// const user_obj = [
+// 	{
+// 		u_name,
+// 		u_id,
+// 		date: Date(),
+// 	},
+// ];
 
-		let like = await Like.find({ post_id: req.params.id });
+// 		let like = await Like.find({ post_id: req.params.id });
 
-		const newLike = new Like({
-			post_id: req.params.id,
-			user_obj: [
-				{
-					u_name,
-					u_id,
-					date: Date(),
-				},
-			],
-		});
+// 		const newLike = new Like({
+// 			post_id: req.params.id,
+// 			user_obj: [
+// 				{
+// 					u_name,
+// 					u_id,
+// 					date: Date(),
+// 				},
+// 			],
+// 		});
 
-		like = await newLike.save();
-		res.json(like);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send('Server Error');
-	}
-});
+// 		like = await newLike.save();
+// 		res.json(like);
+// 	} catch (err) {
+// 		console.error(err.message);
+// 		res.status(500).send('Server Error');
+// 	}
+// });
 
 // @route   POST    api/posts/comment/:id
 // @desc    Comment Post
@@ -234,6 +234,34 @@ router.get('/comment/:id', auth, async (req, res) => {
 		});
 
 		res.json(comments);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server Error');
+	}
+});
+
+// @route   PUT    api/posts/like/:id
+// @desc    Like Post
+// @access  Private
+router.put('/like/:id', auth, async (req, res) => {
+	const { likes } = req.body;
+
+	const postfields = {};
+
+	if (likes) postfields.likes = likes;
+
+	try {
+		let post = await Post.findById(req.params.id);
+
+		if (!post) return res.status(404).json({ msg: 'Post Not Found' });
+
+		post = await Post.findByIdAndUpdate(
+			req.params.id,
+			{ $set: postfields },
+			{ new: true }
+		);
+
+		res.json(post);
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send('Server Error');

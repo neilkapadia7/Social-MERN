@@ -7,6 +7,7 @@ import {
 	GET_AUTH_POSTS,
 	UPDATE_POST,
 	DELETE_POST,
+	LIKE_SUCCESS,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -97,6 +98,25 @@ export const deletePost = (id) => async (dispatch) => {
 
 		dispatch({ type: DELETE_POST, payload: id });
 	} catch (err) {
+		dispatch({ type: POST_ERROR, payload: err.response });
+	}
+};
+
+export const like = (post) => async (dispatch) => {
+	dispatch({ type: POST_LOADING });
+
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const res = await axios.put(`/api/posts/like/${post._id}`, post, config);
+
+		dispatch({ type: LIKE_SUCCESS, payload: res.data });
+	} catch (err) {
+		console.log(err);
 		dispatch({ type: POST_ERROR, payload: err.response });
 	}
 };
