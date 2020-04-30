@@ -22,3 +22,8 @@ export const SET_CURRENT = 'SET_CURRENT';
 export const POST_LOADING = 'POST_LOADING';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
 export const UNLIKE_SUCCESS = 'UNLIKE_SUCCESS';
+
+// Users
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const USER_ERROR = 'USER_ERROR';
+export const FILTER_USER = 'FILTER_USER';

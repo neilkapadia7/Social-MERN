@@ -9,6 +9,9 @@ import {
 	USER_LOADED,
 	USER_INFO_FAIL,
 	USER_INFO_SUCCESS,
+	GET_ALL_USERS,
+	USER_ERROR,
+	FILTER_USER,
 } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
@@ -86,6 +89,24 @@ export const setUserInfo = (userInfo) => async (dispatch) => {
 		console.log(err.response);
 		dispatch({ type: USER_INFO_FAIL, payload: err.response.data.msg });
 	}
+};
+
+export const getAllUsers = () => async (dispatch) => {
+	try {
+		const res = await axios.get('/api/users');
+
+		dispatch({ type: GET_ALL_USERS, payload: res.data });
+	} catch (err) {
+		dispatch({ type: USER_ERROR, payload: err.response });
+	}
+};
+
+export const filterUser = (search, users) => (dispatch) => {
+	const filtered = users.filter((user) =>
+		user.firstName.toLowerCase().includes(search.toLowerCase())
+	);
+
+	dispatch({ type: FILTER_USER, payload: filtered });
 };
 
 export const logout = () => (dispatch) => {

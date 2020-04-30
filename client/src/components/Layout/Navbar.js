@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../Actions/authAction';
 import { Link } from 'react-router-dom';
+import Search from './Search';
 
 const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 	// useEffect(() => {
@@ -60,24 +61,9 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
 				</nav>
 			</div>
 			{isAuthenticated && (
-				<nav className='#2962ff blue accent-4'>
-					<div className='nav-wrapper'>
-						<form>
-							<div className='input-field'>
-								<input
-									id='search'
-									type='search'
-									placeholder='Seach Users'
-									required
-								/>
-								<label className='label-icon' htmlFor='search'>
-									<i className='material-icons'>search</i>
-								</label>
-								<i className='material-icons'>close</i>
-							</div>
-						</form>
-					</div>
-				</nav>
+				<Link to='/users'>
+					<Search />
+				</Link>
 			)}
 		</Fragment>
 	);

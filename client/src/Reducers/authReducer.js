@@ -10,6 +10,9 @@ import {
 	USER_LOADED,
 	USER_INFO_SUCCESS,
 	USER_INFO_FAIL,
+	GET_ALL_USERS,
+	USER_ERROR,
+	FILTER_USER,
 } from '../Actions/types';
 
 const initialState = {
@@ -18,6 +21,8 @@ const initialState = {
 	user: null,
 	loading: false,
 	error: null,
+	account: null,
+	searchUser: null,
 };
 
 export default (state = initialState, action) => {
@@ -65,6 +70,21 @@ export default (state = initialState, action) => {
 				...state,
 				error: action.payload,
 				loading: false,
+			};
+		case GET_ALL_USERS:
+			return {
+				...state,
+				account: action.payload,
+			};
+		case FILTER_USER:
+			return {
+				...state,
+				searchUser: action.payload,
+			};
+		case USER_ERROR:
+			return {
+				...state,
+				error: action.payload,
 			};
 		case SET_LOADING:
 			return {

@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadUser } from '../../Actions/authAction';
+import { loadUser, getAllUsers } from '../../Actions/authAction';
 import { getPosts } from '../../Actions/postAction';
 import PostItem from '../Posts/PostItem';
 import AddBtn from '../Posts/AddBtn';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import AddPost from '../Posts/AddPost';
 
-const Home = ({ postState: { posts, post_loading }, loadUser, getPosts }) => {
+const Home = ({
+	postState: { posts, post_loading },
+	loadUser,
+	getPosts,
+	getAllUsers,
+}) => {
 	useEffect(() => {
 		loadUser();
 
 		getPosts();
+		getAllUsers();
 
 		M.AutoInit();
 	}, [loadUser, getPosts]);
@@ -37,10 +43,13 @@ const Home = ({ postState: { posts, post_loading }, loadUser, getPosts }) => {
 Home.propTypes = {
 	loadUser: PropTypes.func.isRequired,
 	getPosts: PropTypes.func.isRequired,
+	getAllUsers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	postState: state.posts,
 });
 
-export default connect(mapStateToProps, { loadUser, getPosts })(Home);
+export default connect(mapStateToProps, { loadUser, getPosts, getAllUsers })(
+	Home
+);

@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAuthPosts } from '../../../Actions/postAction';
+import { getAllUsers } from '../../../Actions/authAction';
 import PostItem from '../../Posts/PostItem';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
@@ -13,15 +14,17 @@ const Profile = ({
 	auth: { user },
 	postState: { auth_posts, post_loading },
 	getAuthPosts,
+	getAllUsers,
 }) => {
 	const { firstName, lastName, email, date } = user;
 
 	useEffect(() => {
+		getAuthPosts();
+		getAllUsers();
+
 		// Initializes Materialize JS
 		M.AutoInit();
-
-		getAuthPosts();
-	}, [getAuthPosts]);
+	}, [getAuthPosts, getAllUsers]);
 
 	if (post_loading) {
 		return <h3>Loading..</h3>;
@@ -80,6 +83,7 @@ const Profile = ({
 
 Profile.propTypes = {
 	getAuthPosts: PropTypes.func.isRequired,
+	getAllUsers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -87,4 +91,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getAuthPosts })(Profile);
+export default connect(mapStateToProps, { getAuthPosts, getAllUsers })(Profile);

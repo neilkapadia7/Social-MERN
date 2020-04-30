@@ -4,6 +4,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Home from './components/Pages/Home';
 import Profile from './components/Pages/Profile/Profile';
+import Users from './components/Pages/User/Users';
 
 import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './routing/PrivateRoute';
@@ -36,6 +37,7 @@ const App = () => {
 						<Switch>
 							<PrivateRoute exact path='/' component={Home} />
 							<PrivateRoute exact path='/profile' component={Profile} />
+							<PrivateRoute exact path='/users' component={Users} />
 							<Route exact path='/register' component={Register} />
 							<Route exact path='/login' component={Login} />
 						</Switch>
