@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
 								post._id === action.payload._id ? action.payload : post
 						  ),
 				posts: state.posts.map((post) =>
-					action.payload._id ? action.payload : post
+					post._id === action.payload._id ? action.payload : post
 				),
 				post_loading: false,
 			};

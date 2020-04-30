@@ -5,10 +5,19 @@ import { like } from '../../Actions/postAction';
 
 const LikesButton = ({ post, user, like }) => {
 	const { likes } = post;
+	const [didLike, setDidLike] = useState(false);
 
-	const onClick = () => {
-		console.log('Clicked!');
+	useEffect(() => {
+		if (user !== null) {
+			post.likes.map((like) => {
+				if (like.user_id === user._id) {
+					setDidLike(true);
+				}
+			});
+		}
+	}, [post, user]);
 
+	const onLike = () => {
 		let _id = post._id;
 		let likes2 = [
 			{ user_id: user._id, user_name: user.firstName + ' ' + user.lastName },
@@ -21,11 +30,27 @@ const LikesButton = ({ post, user, like }) => {
 		};
 
 		like(post2);
+		setDidLike(!didLike);
+	};
+
+	const onUnlike = () => {
+		let _id = post._id;
+		let likes2 = likes.filter((like) => like.user_id !== user._id);
+
+		let post2 = {
+			_id,
+			likes: likes2,
+		};
+
+		like(post2);
+		setDidLike(!didLike);
 	};
 
 	return (
 		<div style={{ width: '100%' }}>
-			<a style={{ cursor: 'pointer' }} onClick={onClick}>
+			<a
+				className={didLike ? 'liked' : 'unliked'}
+				onClick={didLike ? onUnlike : onLike}>
 				Like
 			</a>
 		</div>

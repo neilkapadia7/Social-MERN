@@ -103,8 +103,6 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 export const like = (post) => async (dispatch) => {
-	dispatch({ type: POST_LOADING });
-
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -120,3 +118,20 @@ export const like = (post) => async (dispatch) => {
 		dispatch({ type: POST_ERROR, payload: err.response });
 	}
 };
+
+// export const unlike = (post) => async (dispatch) => {
+// 	const config = {
+// 		header: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 	};
+
+// 	try {
+// 		const res = await axios.put(`/api/posts/like/${post._id}`, post, config);
+
+// 		dispatch({ type: LIKE_SUCCESS, payload: res.data });
+// 	} catch (err) {
+// 		console.log(err);
+// 		dispatch({ type: POST_ERROR, payload: err.response });
+// 	}
+// };

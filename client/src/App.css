@@ -53,6 +53,22 @@ nav {
 	/* margin: 0; */
 	line-height: 38px;
 }
+
+/* Likes */
+.liked {
+	cursor: pointer;
+	font-weight: 500;
+	color: #489dff;
+	font-size: 15px;
+}
+.unliked {
+	cursor: pointer;
+	font-weight: 500;
+	color: #585858;
+	font-size: 15px;
+}
+
+/* Comment */
 .comment-main-div {
 	margin: 10px 0;
 }
