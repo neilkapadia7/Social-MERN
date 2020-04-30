@@ -1,17 +1,22 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import AddBtn from '../../Posts/AddBtn';
 
 const Users = ({ searchUser }) => {
 	return (
 		<Fragment>
+			<AddBtn />
 			{searchUser !== null ? (
 				searchUser.map((s) => (
-					<div>
+					<div key={s._id}>
 						<div>
-							<h4>
-								{s.firstName} {s.lastName}
-							</h4>
+							<Link to={`/user/profile/${s._id}`}>
+								<h4>
+									{s.firstName} {s.lastName}
+								</h4>
+							</Link>
 							<p>{s.email}</p>
 							<p>{s.location}</p>
 							<p>{s.website}</p>
@@ -26,7 +31,7 @@ const Users = ({ searchUser }) => {
 };
 
 Users.propTypes = {
-	searchUser: PropTypes.object,
+	searchUser: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
