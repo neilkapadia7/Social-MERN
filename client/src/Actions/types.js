@@ -27,3 +27,7 @@ export const UNLIKE_SUCCESS = 'UNLIKE_SUCCESS';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const USER_ERROR = 'USER_ERROR';
 export const FILTER_USER = 'FILTER_USER';
+
+// User Posts
+export const GET_USER_POSTS = 'GET_USER_POSTS';
+export const REMOVE_USER_POSTS = 'REMOVE_USER_POSTS';

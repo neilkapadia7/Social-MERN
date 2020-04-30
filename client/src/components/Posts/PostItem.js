@@ -21,8 +21,12 @@ const PostItem = (props) => {
 
 	useEffect(() => {
 		const comments = async () => {
-			const res = await axios.get(`api/posts/comment/${post._id}`);
-			setComments(res.data);
+			try {
+				const res = await axios.get(`/api/posts/comment/${post._id}`);
+				setComments(res.data);
+			} catch (err) {
+				console.log(err.response);
+			}
 		};
 
 		comments();

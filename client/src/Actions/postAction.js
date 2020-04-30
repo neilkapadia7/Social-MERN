@@ -8,6 +8,8 @@ import {
 	UPDATE_POST,
 	DELETE_POST,
 	LIKE_SUCCESS,
+	GET_USER_POSTS,
+	REMOVE_USER_POSTS,
 } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -102,6 +104,28 @@ export const deletePost = (id) => async (dispatch) => {
 	}
 };
 
+export const getUserPosts = (id) => async (dispatch) => {
+	dispatch({ type: POST_LOADING });
+
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const res = await axios.get(`/api/posts/user/${id}`, config);
+
+		dispatch({ type: GET_USER_POSTS, payload: res.data });
+	} catch (err) {
+		dispatch({ type: POST_ERROR, payload: err.response });
+	}
+};
+
+export const removeUserPosts = () => (dispatch) => {
+	dispatch({ type: REMOVE_USER_POSTS });
+};
+
 export const like = (post) => async (dispatch) => {
 	const config = {
 		header: {
@@ -118,20 +142,3 @@ export const like = (post) => async (dispatch) => {
 		dispatch({ type: POST_ERROR, payload: err.response });
 	}
 };
-
-// export const unlike = (post) => async (dispatch) => {
-// 	const config = {
-// 		header: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-
-// 	try {
-// 		const res = await axios.put(`/api/posts/like/${post._id}`, post, config);
-
-// 		dispatch({ type: LIKE_SUCCESS, payload: res.data });
-// 	} catch (err) {
-// 		console.log(err);
-// 		dispatch({ type: POST_ERROR, payload: err.response });
-// 	}
-// };

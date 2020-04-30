@@ -7,6 +7,8 @@ import {
 	UPDATE_POST,
 	DELETE_POST,
 	LIKE_SUCCESS,
+	GET_USER_POSTS,
+	REMOVE_USER_POSTS,
 } from '../Actions/types';
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
 	post_error: null,
 	auth_posts: null,
 	current: null,
+	user_posts: null,
 };
 
 export default (state = initialState, action) => {
@@ -64,6 +67,18 @@ export default (state = initialState, action) => {
 					state.auth_posts === null
 						? null
 						: state.auth_posts.filter((post) => post._id !== action.payload),
+				post_loading: false,
+			};
+		case GET_USER_POSTS:
+			return {
+				...state,
+				user_posts: action.payload,
+				post_loading: false,
+			};
+		case REMOVE_USER_POSTS:
+			return {
+				...state,
+				user_posts: null,
 				post_loading: false,
 			};
 		case POST_ERROR:

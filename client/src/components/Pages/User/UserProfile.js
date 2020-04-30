@@ -1,20 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getUserPosts, removeUserPosts } from '../../../Actions/postAction';
+
 import AddBtn from '../../Posts/AddBtn';
 import Moment from 'react-moment';
+import PostItem from '../../Posts/PostItem';
 
 const UserProfile = (props) => {
-	const { account } = props;
+	const { account, getUserPosts, removeUserPosts, posts } = props;
 
 	// console.log(props.match.params.id);
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		account.map((a) => (a._id === props.match.params.id ? setUser(a) : null));
+
+		getUserPosts(props.match.params.id);
+
+		return () => {
+			removeUserPosts();
+		};
 	}, [props.match.params]);
 
-	console.log(user);
 	return (
 		<div>
 			<AddBtn />
@@ -57,17 +65,30 @@ const UserProfile = (props) => {
 			) : (
 				<h3>Loading....</h3>
 			)}
-			<h2>User</h2>
+			<div className='post-main-div'>
+				{posts !== null
+					? posts.map((post) => (
+							<Fragment key={post._id}>
+								<PostItem key={post._id} post={post} />
+							</Fragment>
+					  ))
+					: null}
+			</div>
 		</div>
 	);
 };
 
 UserProfile.propTypes = {
 	account: PropTypes.array,
+	getUserPosts: PropTypes.func.isRequired,
+	removeUserPosts: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	account: state.auth.account,
+	posts: state.posts.user_posts,
 });
 
-export default connect(mapStateToProps, {})(UserProfile);
+export default connect(mapStateToProps, { getUserPosts, removeUserPosts })(
+	UserProfile
+);
