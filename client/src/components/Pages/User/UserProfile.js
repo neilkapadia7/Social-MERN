@@ -66,7 +66,7 @@ const UserProfile = (props) => {
 							<p>Following: {user.following.length}</p>
 						</div>
 						<div>
-							<Follow />
+							<Follow guestUser={user} />
 						</div>
 					</div>
 				</div>
