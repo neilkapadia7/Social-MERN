@@ -126,11 +126,13 @@ router.get('/', auth, async (req, res) => {
 router.put('/following/:id', auth, async (req, res) => {
 	const { followData } = req.body;
 
+	// console.log(followData);
+
 	const authuserfields = {};
-	if (followData) authuserfields.following = followData.following;
+	if (followData) authuserfields.following = followData.authData.following;
 
 	const guestuserfield = {};
-	if (followData) guestuserfield.followers = followData.followers;
+	if (followData) guestuserfield.followers = followData.guestData.followers;
 
 	try {
 		let authUser = await User.findById(req.params.id);
@@ -145,17 +147,13 @@ router.put('/following/:id', auth, async (req, res) => {
 		).select('-password');
 
 		followedUser = await User.findByIdAndUpdate(
-			followData.following.user_id,
+			followData.guestData._id,
 			{ $set: guestuserfield },
 			{ new: true }
 		).select('-password');
 
 		res.json({ authUser, followedUser });
-		console.log('Successful');
-
-		// let guestUser = await User.findByIdAndUpdate();
 	} catch (err) {
-		console.log('Error');
 		console.error(err.message);
 		res.status(500).send('Server Error');
 	}

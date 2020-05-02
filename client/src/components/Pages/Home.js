@@ -21,7 +21,7 @@ const Home = ({
 		getAllUsers();
 
 		M.AutoInit();
-	}, [loadUser, getPosts]);
+	}, [loadUser, getPosts, getAllUsers]);
 
 	if (post_loading) {
 		return <h3>Loading..</h3>;

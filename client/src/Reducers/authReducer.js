@@ -85,7 +85,12 @@ export default (state = initialState, action) => {
 		case ADD_FOLLOWING:
 			return {
 				...state,
-				user: action.payload,
+				user: action.payload.authUser,
+				account: state.account.map((a) =>
+					a._id === action.payload.followedUser._id
+						? action.payload.followedUser
+						: a
+				),
 				loading: false,
 			};
 		case USER_ERROR:

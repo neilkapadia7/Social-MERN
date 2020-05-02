@@ -15,6 +15,7 @@ const LikesButton = ({ post, user, like }) => {
 				}
 			});
 		}
+		// eslint-disable-next-line
 	}, [post, user]);
 
 	const onLike = () => {

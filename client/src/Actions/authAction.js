@@ -121,14 +121,12 @@ export const addFollower = (formData) => async (dispatch) => {
 
 	try {
 		const res = await axios.put(
-			`/api/users/following/${formData.followData.followers.user_id}`,
+			`/api/users/following/${formData.followData.authData._id}`,
 			formData,
 			config
 		);
 
-		console.log(res.data);
-
-		// dispatch({ type: ADD_FOLLOWING, payload: res.data });
+		dispatch({ type: ADD_FOLLOWING, payload: res.data });
 	} catch (err) {
 		console.log(err.response);
 		dispatch({ type: USER_ERROR, payload: err.response.data.msg });

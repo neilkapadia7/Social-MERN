@@ -2,14 +2,14 @@ import React, { useState, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUserPosts, removeUserPosts } from '../../../Actions/postAction';
-
+import EditProfile from '../Profile/EditProfile';
 import AddBtn from '../../Posts/AddBtn';
 import Moment from 'react-moment';
 import PostItem from '../../Posts/PostItem';
 import Follow from '../../Follow/Follow';
 
 const UserProfile = (props) => {
-	const { account, getUserPosts, removeUserPosts, posts } = props;
+	const { account, getUserPosts, removeUserPosts, posts, authUser } = props;
 
 	// console.log(props.match.params.id);
 	const [user, setUser] = useState(null);
@@ -32,6 +32,16 @@ const UserProfile = (props) => {
 					<h2 className='profile-name'>
 						{user.firstName} {user.lastName}
 					</h2>
+					<EditProfile />
+					{authUser._id === user._id ? (
+						<a href='#edit-profile' className='modal-trigger edit-profile'>
+							Edit Profile
+						</a>
+					) : (
+						<div>
+							<Follow guestUser={user} />
+						</div>
+					)}
 					<p className='profile-email'>{user.email}</p>
 					{user.bio && <p className='profile-bio'>{user.bio}</p>}
 
@@ -65,9 +75,6 @@ const UserProfile = (props) => {
 							<p>Followers: {user.followers.length}</p>
 							<p>Following: {user.following.length}</p>
 						</div>
-						<div>
-							<Follow guestUser={user} />
-						</div>
 					</div>
 				</div>
 			) : (
@@ -90,11 +97,13 @@ UserProfile.propTypes = {
 	account: PropTypes.array,
 	getUserPosts: PropTypes.func.isRequired,
 	removeUserPosts: PropTypes.func.isRequired,
+	authUser: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
 	account: state.auth.account,
 	posts: state.posts.user_posts,
+	authUser: state.auth.user,
 });
 
 export default connect(mapStateToProps, { getUserPosts, removeUserPosts })(
