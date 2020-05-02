@@ -120,4 +120,41 @@ router.get('/', auth, async (req, res) => {
 	}
 });
 
+// @route  PUT    api/users/following/:id
+// @desc   Follow or Unfollow People
+// @access   Private
+router.put('/following/:id', auth, async (req, res) => {
+	const { followData } = req.body;
+
+	const authuserfields = {};
+	if (followData) authuserfields.following = followData.following;
+
+	const guestuserfield = {};
+	if (followData) guestuserfield.followers = followData.followers;
+
+	console.log(followData);
+
+	// try {
+	// 	let authUser = await User.findById(req.params.id);
+	// 	if (!authUser) return res.status(404).json({ msg: 'User Not Found' });
+	// 	if (authUser._id.toString() !== req.user.id) {
+	// 		return res.status(401).json({ msg: 'Not Authorized' });
+	// 	}
+	// 	authUser = await User.findByIdAndUpdate(
+	// 		req.params.id,
+	// 		{ $set: authuserfields },
+	// 		{ new: true }
+	// 	).select('-password');
+
+	// 	followedUser = await User.findByIdAndUpdate();
+
+	// 	res.json(authUser);
+
+	// 	let guestUser = await User.findByIdAndUpdate();
+	// } catch (err) {
+	// 	console.error(err.message);
+	// 	res.status(500).send('Server Error');
+	// }
+});
+
 module.exports = router;

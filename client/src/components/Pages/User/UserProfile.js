@@ -6,6 +6,7 @@ import { getUserPosts, removeUserPosts } from '../../../Actions/postAction';
 import AddBtn from '../../Posts/AddBtn';
 import Moment from 'react-moment';
 import PostItem from '../../Posts/PostItem';
+import Follow from '../../Follow/Follow';
 
 const UserProfile = (props) => {
 	const { account, getUserPosts, removeUserPosts, posts } = props;
@@ -60,6 +61,13 @@ const UserProfile = (props) => {
 								{user.website}
 							</a>
 						)}
+						<div>
+							<p>Followers: {user.followers.length}</p>
+							<p>Following: {user.following.length}</p>
+						</div>
+						<div>
+							<Follow />
+						</div>
 					</div>
 				</div>
 			) : (

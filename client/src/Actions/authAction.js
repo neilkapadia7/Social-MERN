@@ -12,6 +12,7 @@ import {
 	GET_ALL_USERS,
 	USER_ERROR,
 	FILTER_USER,
+	ADD_FOLLOWING,
 } from './types';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
@@ -107,6 +108,29 @@ export const filterUser = (search, users) => (dispatch) => {
 	);
 
 	dispatch({ type: FILTER_USER, payload: filtered });
+};
+
+export const addFollower = (formData) => async (dispatch) => {
+	dispatch({ type: SET_LOADING });
+
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const res = await axios.put(
+			`/api/users/following/${formData.followData.followers._id}`,
+			formData,
+			config
+		);
+
+		dispatch({ type: ADD_FOLLOWING, payload: res.data });
+	} catch (err) {
+		console.log(err.response);
+		dispatch({ type: USER_ERROR, payload: err.response.data.msg });
+	}
 };
 
 export const logout = () => (dispatch) => {

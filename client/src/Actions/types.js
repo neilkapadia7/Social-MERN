@@ -31,3 +31,6 @@ export const FILTER_USER = 'FILTER_USER';
 // User Posts
 export const GET_USER_POSTS = 'GET_USER_POSTS';
 export const REMOVE_USER_POSTS = 'REMOVE_USER_POSTS';
+
+// Followers
+export const ADD_FOLLOWING = 'ADD_FOLLOWING';

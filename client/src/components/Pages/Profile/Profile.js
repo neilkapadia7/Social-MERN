@@ -65,6 +65,9 @@ const Profile = ({
 							<i className='material-icons profile-icon'>link</i> {user.website}
 						</a>
 					)}
+
+					<div>Followers: {user.followers.length}</div>
+					<div>Following: {user.following.length}</div>
 				</div>
 			</div>
 			<AddBtn />

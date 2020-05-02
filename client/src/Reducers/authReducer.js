@@ -13,6 +13,7 @@ import {
 	GET_ALL_USERS,
 	USER_ERROR,
 	FILTER_USER,
+	ADD_FOLLOWING,
 } from '../Actions/types';
 
 const initialState = {
@@ -80,6 +81,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				searchUser: action.payload,
+			};
+		case ADD_FOLLOWING:
+			return {
+				...state,
+				user: action.payload,
+				loading: false,
 			};
 		case USER_ERROR:
 			return {
