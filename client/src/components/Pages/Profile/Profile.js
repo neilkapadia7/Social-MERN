@@ -9,6 +9,8 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import AddBtn from '../../Posts/AddBtn';
 import Moment from 'react-moment';
 import EditProfile from './EditProfile';
+import FollowersModal from '../../Follow/FollowersModal';
+import FollowingModal from '../../Follow/FollowingModal';
 
 const Profile = ({
 	auth: { user },
@@ -65,9 +67,14 @@ const Profile = ({
 							<i className='material-icons profile-icon'>link</i> {user.website}
 						</a>
 					)}
-
-					<div>Followers: {user.followers.length}</div>
-					<div>Following: {user.following.length}</div>
+					<FollowersModal followers={user.followers} user_id={user._id} />
+					<FollowingModal following={user.following} user_id={user._id} />
+					<a href={`#followers-modal-${user._id}`} className='modal-trigger'>
+						Followers: {user.followers.length}
+					</a>
+					<a href={`#following-modal-${user._id}`} className='modal-trigger'>
+						Following: {user.following.length}
+					</a>
 				</div>
 			</div>
 			<AddBtn />

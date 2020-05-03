@@ -7,6 +7,10 @@ import AddBtn from '../../Posts/AddBtn';
 import Moment from 'react-moment';
 import PostItem from '../../Posts/PostItem';
 import Follow from '../../Follow/Follow';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import FollowersModal from '../../Follow/FollowersModal';
+import FollowingModal from '../../Follow/FollowingModal';
 
 const UserProfile = (props) => {
 	const { account, getUserPosts, removeUserPosts, posts, authUser } = props;
@@ -18,6 +22,8 @@ const UserProfile = (props) => {
 		account.map((a) => (a._id === props.match.params.id ? setUser(a) : null));
 
 		getUserPosts(props.match.params.id);
+
+		M.AutoInit();
 
 		return () => {
 			removeUserPosts();
@@ -72,8 +78,18 @@ const UserProfile = (props) => {
 							</a>
 						)}
 						<div>
-							<p>Followers: {user.followers.length}</p>
-							<p>Following: {user.following.length}</p>
+							<FollowersModal followers={user.followers} user_id={user._id} />
+							<FollowingModal following={user.following} user_id={user._id} />
+							<a
+								href={`#followers-modal-${user._id}`}
+								className='modal-trigger'>
+								Followers: {user.followers.length}
+							</a>
+							<a
+								href={`#following-modal-${user._id}`}
+								className='modal-trigger'>
+								Following: {user.following.length}
+							</a>
 						</div>
 					</div>
 				</div>
