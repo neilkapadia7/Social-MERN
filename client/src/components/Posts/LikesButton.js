@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { like } from '../../Actions/postAction';
+import LikesModal from './LikesModal';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 const LikesButton = ({ post, user, like }) => {
 	const { likes } = post;
@@ -15,6 +18,8 @@ const LikesButton = ({ post, user, like }) => {
 				}
 			});
 		}
+
+		M.AutoInit();
 		// eslint-disable-next-line
 	}, [post, user]);
 
@@ -48,13 +53,19 @@ const LikesButton = ({ post, user, like }) => {
 	};
 
 	return (
-		<div style={{ width: '100%' }}>
-			<a
-				className={didLike ? 'liked' : 'unliked'}
-				onClick={didLike ? onUnlike : onLike}>
-				Like
+		<Fragment>
+			<a href={`#likes-modal-${post._id}`} className='modal-trigger'>
+				{post.likes.length} Likes
 			</a>
-		</div>
+			<LikesModal likes={likes} post_id={post._id} />
+			<div style={{ width: '100%' }}>
+				<a
+					className={didLike ? 'liked' : 'unliked'}
+					onClick={didLike ? onUnlike : onLike}>
+					Like
+				</a>
+			</div>
+		</Fragment>
 	);
 };
 
