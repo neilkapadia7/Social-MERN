@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 import AddBtn from '../../Posts/AddBtn';
 
 const Users = ({ searchUser }) => {
+	if (searchUser === null) {
+		return <h5>Please Type in the SearcBox</h5>;
+	}
+
 	return (
 		<Fragment>
 			<AddBtn />
-			{searchUser !== null ? (
+			{searchUser !== null && searchUser.length > 0 ? (
 				searchUser.map((s) => (
-					<div key={s._id}>
+					<div key={s._id} className='search-user-div'>
 						<div>
 							<Link to={`/user/profile/${s._id}`}>
 								<h4>

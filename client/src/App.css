@@ -92,6 +92,7 @@ nav {
 	margin: 0;
 	line-height: 30px;
 	float: left;
+	color: #000;
 }
 .comment-date {
 	font-weight: 300;
@@ -237,6 +238,13 @@ nav {
 	font-weight: 700;
 	color: #000;
 }
+
+/* Search */
+.search-user-div {
+	margin-top: 15px;
+	border-bottom: 1px solid #ccc;
+}
+
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;

@@ -15,7 +15,6 @@ import FollowingModal from '../../Follow/FollowingModal';
 const UserProfile = (props) => {
 	const { account, getUserPosts, removeUserPosts, posts, authUser } = props;
 
-	// console.log(props.match.params.id);
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -28,7 +27,7 @@ const UserProfile = (props) => {
 		return () => {
 			removeUserPosts();
 		};
-	}, [props.match.params]);
+	}, [getUserPosts, account, removeUserPosts, props.match.params]);
 
 	return (
 		<div>
@@ -72,7 +71,8 @@ const UserProfile = (props) => {
 							<a
 								className='profile-website'
 								href={user.website}
-								target='_blank'>
+								target='_blank'
+								rel='noopener noreferrer'>
 								<i className='material-icons profile-icon'>link</i>{' '}
 								{user.website}
 							</a>
@@ -99,7 +99,7 @@ const UserProfile = (props) => {
 				<h3>Loading....</h3>
 			)}
 			<div className='post-main-div'>
-				{posts !== null
+				{posts && posts !== null
 					? posts.map((post) => (
 							<Fragment key={post._id}>
 								<PostItem key={post._id} post={post} />

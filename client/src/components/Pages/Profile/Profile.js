@@ -63,7 +63,11 @@ const Profile = ({
 						</p>
 					)}
 					{user.website && (
-						<a className='profile-website' href={user.website} target='_blank'>
+						<a
+							className='profile-website'
+							href={user.website}
+							target='_blank'
+							rel='noopener noreferrer'>
 							<i className='material-icons profile-icon'>link</i> {user.website}
 						</a>
 					)}

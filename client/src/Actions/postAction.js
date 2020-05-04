@@ -31,7 +31,7 @@ export const getPosts = () => async (dispatch) => {
 };
 
 export const addPost = (formData) => async (dispatch) => {
-	dispatch({ type: POST_LOADING });
+	// dispatch({ type: POST_LOADING });
 
 	const config = {
 		header: {
@@ -69,7 +69,7 @@ export const getAuthPosts = () => async (dispatch) => {
 export const updatePost = (post) => async (dispatch) => {
 	console.log('Update Called!');
 
-	dispatch({ type: POST_LOADING });
+	// dispatch({ type: POST_LOADING });
 
 	const config = {
 		header: {
@@ -87,7 +87,7 @@ export const updatePost = (post) => async (dispatch) => {
 };
 
 export const deletePost = (id) => async (dispatch) => {
-	dispatch({ type: POST_LOADING });
+	// dispatch({ type: POST_LOADING });
 
 	const config = {
 		header: {

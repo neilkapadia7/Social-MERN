@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 const CommentPost = (props) => {
 	const { comments, postid } = props;
@@ -46,7 +47,9 @@ const CommentPost = (props) => {
 			{comments2 !== null
 				? comments2.map((comment) => (
 						<div key={comment._id} className='commentitem-div'>
-							<p className='comment-user'>{comment.user}</p>
+							<Link to={`/user/profile/${comment.user_id}`}>
+								<p className='comment-user'>{comment.user}</p>
+							</Link>
 							<Moment className='comment-date' fromNow>
 								{comment.date}
 							</Moment>

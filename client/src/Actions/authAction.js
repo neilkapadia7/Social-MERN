@@ -111,7 +111,7 @@ export const filterUser = (search, users) => (dispatch) => {
 };
 
 export const addFollower = (formData) => async (dispatch) => {
-	dispatch({ type: SET_LOADING });
+	// dispatch({ type: SET_LOADING });
 
 	const config = {
 		headers: {

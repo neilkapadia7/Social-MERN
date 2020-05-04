@@ -9,6 +9,7 @@ import UpdatePost from './UpdatePost';
 import { deletePost } from '../../Actions/postAction';
 import Moment from 'react-moment';
 import LikesButton from './LikesButton';
+import { Link } from 'react-router-dom';
 
 const PostItem = (props) => {
 	const {
@@ -39,7 +40,9 @@ const PostItem = (props) => {
 	return (
 		<div className='postitem-div'>
 			<div className='post-head'>
-				<p className='post-author'>{post.author}</p>
+				<Link to={`/user/profile/${post.user}`}>
+					<p className='post-author'>{post.author}</p>
+				</Link>
 				{user && user._id === post.user ? (
 					<div className='update-remove-div'>
 						<a href='#update-modal' className='modal-trigger update'>

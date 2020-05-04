@@ -32,7 +32,7 @@ const Home = ({
 			<AddBtn />
 			<AddPost />
 			<div className='post-main-div'>
-				{posts !== null
+				{posts && posts !== null
 					? posts.map((post) => <PostItem key={post._id} post={post} />)
 					: null}
 			</div>
