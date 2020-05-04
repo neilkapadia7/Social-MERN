@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import { Link } from 'react-router-dom';
 
 const LikesModal = ({ likes, post_id }) => {
 	useEffect(() => {

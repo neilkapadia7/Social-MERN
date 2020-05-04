@@ -7,6 +7,8 @@ import Profile from './components/Pages/Profile/Profile';
 import Users from './components/Pages/User/Users';
 import UserProfile from './components/Pages/User/UserProfile';
 
+// import AuthApp from './AuthApp';
+
 import Navbar from './components/Layout/Navbar';
 import PrivateRoute from './routing/PrivateRoute';
 

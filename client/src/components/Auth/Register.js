@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { register, clearErrors, loadUser } from '../../Actions/authAction';
 import PropTypes from 'prop-types';
+// import Navbar from '../Layout/Navbar';
 
 const Register = (props) => {
 	const {
@@ -52,39 +53,49 @@ const Register = (props) => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={onSubmit}>
-				<input
-					type='text'
-					placeholder='First Name'
-					onChange={(e) => setFirstName(e.target.value)}
-					value={firstName}
-					required
-				/>
-				<input
-					type='text'
-					placeholder='Last Name'
-					onChange={(e) => setLastName(e.target.value)}
-					value={lastName}
-					required
-				/>
-				<input
-					type='email'
-					placeholder='Email ID'
-					onChange={(e) => setEmail(e.target.value)}
-					value={email}
-					required
-				/>
-				<input
-					type='password'
-					placeholder='Password'
-					onChange={(e) => setPassword(e.target.value)}
-					value={password}
-					required
-				/>
-				<input type='submit' value='Register' />
-			</form>
-		</div>
+		<Fragment>
+			{/* <Navbar />
+			<div className='container'> */}
+			<div className='auth-main-div'>
+				<h2>Register</h2>
+				<form onSubmit={onSubmit}>
+					<input
+						type='text'
+						placeholder='First Name'
+						onChange={(e) => setFirstName(e.target.value)}
+						value={firstName}
+						required
+						className='auth-textfield'
+					/>
+					<input
+						type='text'
+						placeholder='Last Name'
+						onChange={(e) => setLastName(e.target.value)}
+						value={lastName}
+						required
+						className='auth-textfield'
+					/>
+					<input
+						type='email'
+						placeholder='Email ID'
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
+						required
+						className='auth-textfield'
+					/>
+					<input
+						type='password'
+						placeholder='Password'
+						onChange={(e) => setPassword(e.target.value)}
+						value={password}
+						required
+						className='auth-textfield'
+					/>
+					<input type='submit' value='Register' className='auth-submit' />
+				</form>
+			</div>
+			{/* </div> */}
+		</Fragment>
 	);
 };
 
