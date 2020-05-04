@@ -155,6 +155,30 @@ nav {
 	border: 1px solid #1da1f2;
 	border-radius: 20px;
 }
+/* Likes, Followers & Following Modal */
+.modal-content {
+	margin-top: 15px;
+	margin-left: 0;
+}
+.likes-row {
+	border-bottom: 0.5px solid rgb(212, 212, 212);
+	margin-left: 0;
+	display: flex;
+}
+.modal-para {
+	margin: 0;
+	line-height: 50px;
+	font-size: 15px;
+	color: #000;
+	padding-left: 20px;
+	cursor: pointer;
+	font-weight: 600;
+}
+.likes-icon {
+	line-height: 50px;
+	color: #1985ff;
+}
+
 .profile-details-div {
 	display: flex;
 }
@@ -187,7 +211,32 @@ nav {
 	font-size: 16px;
 	line-height: 20px;
 }
+.profile-follow-div {
+	margin-top: 20px;
+}
+.following-para {
+	margin-left: 18px;
+	color: #657786;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+}
+.followers-para {
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	color: #657786;
+	margin-left: 5px;
+}
+.following-para:hover,
+.followers-para:hover {
+	text-decoration: underline;
+}
 
+.strong-follow {
+	font-weight: 700;
+	color: #000;
+}
 .App-logo {
 	height: 40vmin;
 	pointer-events: none;

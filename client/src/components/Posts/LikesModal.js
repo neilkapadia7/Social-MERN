@@ -12,11 +12,14 @@ const LikesModal = ({ likes, post_id }) => {
 		<div id={`likes-modal-${post_id}`} className='modal' style={modalStyle}>
 			<div className='modal-content'>
 				<h4>Likes</h4>
-				{likes.map((like) => (
-					<div className='row' key={like.user_id}>
-						<p>{like.user_name}</p>
-					</div>
-				))}
+				<div className='modal-content'>
+					{likes.map((like) => (
+						<div className='row likes-row' key={like.user_id}>
+							<i className='material-icons likes-icon'>thumb_up</i>
+							<p className='modal-para'>{like.user_name}</p>
+						</div>
+					))}
+				</div>
 			</div>
 			<div className='modal-footer'>
 				<a href='#!' className='modal-close waves-effect blue waves-light btn'>

@@ -77,20 +77,22 @@ const UserProfile = (props) => {
 								{user.website}
 							</a>
 						)}
-						<div>
-							<FollowersModal followers={user.followers} user_id={user._id} />
-							<FollowingModal following={user.following} user_id={user._id} />
-							<a
-								href={`#followers-modal-${user._id}`}
-								className='modal-trigger'>
-								Followers: {user.followers.length}
-							</a>
-							<a
-								href={`#following-modal-${user._id}`}
-								className='modal-trigger'>
-								Following: {user.following.length}
-							</a>
-						</div>
+					</div>
+					<div className='profile-follow-div'>
+						<FollowersModal followers={user.followers} user_id={user._id} />
+						<FollowingModal following={user.following} user_id={user._id} />
+						<a
+							href={`#followers-modal-${user._id}`}
+							className='modal-trigger followers-para'>
+							<span className='strong-follow'>{user.followers.length}</span>{' '}
+							Followers
+						</a>
+						<a
+							href={`#following-modal-${user._id}`}
+							className='modal-trigger following-para'>
+							<span className='strong-follow'>{user.following.length}</span>{' '}
+							Following
+						</a>
 					</div>
 				</div>
 			) : (
