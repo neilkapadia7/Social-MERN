@@ -1,4 +1,0 @@
-{
-	"mongoURI": "mongodb+srv://im_neil17:neilkap7@socialapp-phgmi.mongodb.net/test?retryWrites=true&w=majority",
-	"jwtSecret": "chandler_bing"
-}
